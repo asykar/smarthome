@@ -5,6 +5,11 @@ interface HealthResponse {
   status: string;
   service: string;
   version: string;
+  checks: {
+    backend: string;
+    database: string;
+    mqtt: string;
+  };
 }
 
 export const DashboardPage: React.FC = () => {
@@ -191,7 +196,7 @@ export const DashboardPage: React.FC = () => {
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginTop: "4px" }}>
                 <div>
                   <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>Status</span>
-                  <p style={{ margin: "2px 0 0 0", fontSize: "0.9rem", fontWeight: 600, color: "#10b981" }}>
+                  <p style={{ margin: "2px 0 0 0", fontSize: "0.9rem", fontWeight: 600, color: healthData.status === "ok" ? "#10b981" : "#ef4444" }}>
                     {healthData.status.toUpperCase()}
                   </p>
                 </div>
@@ -202,6 +207,32 @@ export const DashboardPage: React.FC = () => {
                 <div>
                   <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>Versi</span>
                   <p style={{ margin: "2px 0 0 0", fontSize: "0.9rem", fontWeight: 600 }}>v{healthData.version}</p>
+                </div>
+              </div>
+              
+              <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.06)", margin: "6px 0" }} />
+              
+              <div>
+                <span style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.5)", fontWeight: 600 }}>Detail Pemeriksaan:</span>
+                <div style={{ display: "flex", gap: "20px", marginTop: "6px", flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.85rem" }}>
+                    <span>🖥️ Backend:</span>
+                    <span style={{ color: healthData.checks.backend === "ok" ? "#10b981" : "#ef4444", fontWeight: 600 }}>
+                      {healthData.checks.backend.toUpperCase()}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.85rem" }}>
+                    <span>💾 Database:</span>
+                    <span style={{ color: healthData.checks.database === "ok" ? "#10b981" : "#ef4444", fontWeight: 600 }}>
+                      {healthData.checks.database.toUpperCase()}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.85rem" }}>
+                    <span>🔌 MQTT Broker:</span>
+                    <span style={{ color: healthData.checks.mqtt === "ok" ? "#10b981" : "#9ca3af", fontWeight: 600 }}>
+                      {healthData.checks.mqtt.toUpperCase()}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

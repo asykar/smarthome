@@ -46,18 +46,29 @@ python -m venv .venv
     source .venv/bin/activate
     ```
 
-### 3. Install Dependensi
+### 4. Konfigurasi Environment Variable
+Salin berkas `.env.example` menjadi `.env` pada folder root proyek atau folder `backend/`, lalu sesuaikan nilainya:
 ```bash
-pip install -r requirements.txt
+# Di Windows PowerShell / CMD
+copy .env.example .env
+
+# Di Linux / macOS
+cp .env.example .env
 ```
 
-### 4. Jalankan Server FastAPI
+### 5. Inisialisasi Database
+Jalankan script inisialisasi untuk membuat folder database dan file SQLite database:
+```bash
+python app/scripts/init_db.py
+```
+
+### 6. Jalankan Server FastAPI
 Jalankan server menggunakan Uvicorn di port 8000:
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-### 5. Verifikasi Endpoint
+### 7. Verifikasi Endpoint
 Buka browser atau gunakan HTTP client (curl/postman) untuk memverifikasi server berjalan:
 *   URL Utama: [http://localhost:8000/](http://localhost:8000/)
 *   Health Check: [http://localhost:8000/api/health](http://localhost:8000/api/health)

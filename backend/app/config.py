@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     MQTT_PORT: int = int(os.getenv("MQTT_PORT", 1883))
     MQTT_USERNAME: str = os.getenv("MQTT_USERNAME", "smarthome")
     MQTT_PASSWORD: str = os.getenv("MQTT_PASSWORD", "change-this-password")
+    
+    TIMEZONE: str = os.getenv("TIMEZONE", "Asia/Jakarta")
 
     class Config:
         env_file = ".env"
